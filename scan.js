@@ -53,10 +53,12 @@ const ACTIONS_BY_STATUS = {
     { action: "used_up", label: "登记用完", className: "primary-button" },
     { action: "discard", label: "登记报废", className: "danger-button" },
     { action: "lost", label: "标记遗失", className: "secondary-button" },
+    { action: "undo_open", label: "撤销开封（误操作）", className: "secondary-button" },
   ],
 };
 
 let currentUnit = null;
+let currentProfile = null;
 
 function escapeHtml(value) {
   return String(value ?? "")
@@ -108,6 +110,8 @@ async function requireSession() {
     return null;
   }
 
+  currentProfile = profile;
+
   sessionText.textContent = `${profile.display_name} · ${
     profile.staff_role === "admin" ? "管理员" : "员工"
   }`;
@@ -142,7 +146,9 @@ function renderUnit(unit) {
     </div>
   `;
 
-  const actions = ACTIONS_BY_STATUS[unit.status] || [];
+  const actions = (ACTIONS_BY_STATUS[unit.status] || []).filter(
+    (item) => item.action !== "undo_open" || currentProfile?.staff_role === "admin"
+  );
   if (!actions.length) {
     actionCard.classList.add("hidden-card");
     return;
@@ -254,11 +260,20 @@ async function performAction(action) {
     used_up: "登记用完",
     discard: "登记报废",
     lost: "标记遗失",
+    undo_open: "撤销开封",
   };
+
+  if (action === "undo_open" && !operationNote.value.trim()) {
+    alert("撤销开封必须填写原因，例如：员工误点，实物未开封。");
+    operationNote.focus();
+    return;
+  }
 
   const confirmText = action === "discard"
     ? "确定将这件物料标记为报废吗？此操作会保留流水记录。"
-    : `确定执行“${labels[action] || action}”吗？`;
+    : action === "undo_open"
+      ? "确定撤销本次开封吗？仅适用于误操作且实物并未真正开封，系统会保留完整流水。"
+      : `确定执行“${labels[action] || action}”吗？`;
 
   if (!window.confirm(confirmText)) return;
 

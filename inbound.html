@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f3f1e9" />
+  <title>弄潮里库存系统｜进货登记</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="app-page">
+  <header class="app-header compact-header">
+    <div>
+      <p class="eyebrow">INBOUND</p>
+      <h1>进货登记</h1>
+      <p id="sessionText" class="muted">正在验证登录状态…</p>
+    </div>
+    <div class="header-actions">
+      <a class="secondary-button button-link" href="dashboard.html">返回总览</a>
+      <a class="secondary-button button-link" href="products.html">商品档案</a>
+      <a class="secondary-button button-link" href="labels.html">打印标签</a>
+    </div>
+  </header>
+
+  <main class="dashboard-shell management-shell">
+    <section class="content-card">
+      <div class="section-title-row">
+        <div>
+          <p class="eyebrow">NEW DELIVERY</p>
+          <h2>登记一批到货</h2>
+        </div>
+      </div>
+
+      <form id="inboundForm" class="inventory-form form-grid">
+        <div class="field field-full">
+          <label for="productSelect">选择商品 *</label>
+          <select id="productSelect" required>
+            <option value="">正在加载商品…</option>
+          </select>
+          <small id="productHint">先在“商品档案”中建立牛奶、糖浆、咖啡豆等标准商品。</small>
+        </div>
+
+        <div class="field">
+          <label for="supplier">供应商</label>
+          <input id="supplier" type="text" placeholder="例如 欧帝供应链" maxlength="100" />
+        </div>
+
+        <div class="field">
+          <label for="storageLocation">存放位置 *</label>
+          <input id="storageLocation" type="text" value="门店仓库" maxlength="100" required />
+        </div>
+
+        <div class="field">
+          <label for="purchaseDate">进货日期 *</label>
+          <input id="purchaseDate" type="date" required />
+        </div>
+
+        <div class="field">
+          <label for="inboundAt">实际到货时间 *</label>
+          <input id="inboundAt" type="datetime-local" required />
+        </div>
+
+        <div class="field">
+          <label for="productionDate">生产日期</label>
+          <input id="productionDate" type="date" />
+        </div>
+
+        <div class="field">
+          <label for="expiryDate">到期日期</label>
+          <input id="expiryDate" type="date" />
+          <small>食品原料建议按包装实际日期填写。</small>
+        </div>
+
+        <div class="field">
+          <label for="quantity">单件数量 *</label>
+          <input id="quantity" type="number" min="1" max="500" step="1" value="1" required />
+          <small>一箱8瓶就填8，每瓶都会生成独立编码。</small>
+        </div>
+
+        <div class="field">
+          <label for="unitCost">单件成本（元）</label>
+          <input id="unitCost" type="number" min="0" step="0.0001" placeholder="可不填" />
+        </div>
+
+        <div class="field field-full">
+          <label for="note">进货备注</label>
+          <textarea id="note" class="operation-note" placeholder="例如：冷链到货正常、外箱轻微破损、发票待补"></textarea>
+        </div>
+
+        <div class="field field-full">
+          <button id="submitBtn" class="primary-button" type="submit">确认入库并生成单件编码</button>
+        </div>
+      </form>
+
+      <p id="formMessage" class="form-message" role="alert" aria-live="polite"></p>
+    </section>
+
+    <section id="resultCard" class="content-card result-card hidden">
+      <p class="eyebrow">SUCCESS</p>
+      <h2>进货登记完成</h2>
+      <div id="resultDetails" class="detail-grid"></div>
+      <div class="inline-actions">
+        <a id="printLabelsLink" class="primary-button button-link header-primary" href="labels.html">打印本批标签</a>
+        <a class="secondary-button button-link" href="dashboard.html">查看库存总览</a>
+        <button id="continueBtn" class="secondary-button" type="button">继续登记下一批</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
+  <script src="inbound.js"></script>
+</body>
+</html>

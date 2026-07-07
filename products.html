@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f3f1e9" />
+  <title>弄潮里库存系统｜商品档案</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="app-page">
+  <header class="app-header compact-header">
+    <div>
+      <p class="eyebrow">PRODUCT MASTER</p>
+      <h1>商品档案</h1>
+      <p id="sessionText" class="muted">正在验证登录状态…</p>
+    </div>
+    <div class="header-actions">
+      <a class="secondary-button button-link" href="dashboard.html">返回总览</a>
+      <a class="primary-button button-link header-primary" href="inbound.html">登记进货</a>
+    </div>
+  </header>
+
+  <main class="dashboard-shell management-shell">
+    <section class="content-card">
+      <div class="section-title-row">
+        <div>
+          <p class="eyebrow">CREATE / EDIT</p>
+          <h2 id="formTitle">新增商品档案</h2>
+        </div>
+        <button id="resetBtn" class="secondary-button" type="button">清空表单</button>
+      </div>
+
+      <form id="productForm" class="inventory-form form-grid">
+        <input id="productId" type="hidden" />
+
+        <div class="field">
+          <label for="sku">商品编码 *</label>
+          <input id="sku" type="text" placeholder="例如 SY-MILK-1.5L" maxlength="50" required />
+          <small>建议使用英文、数字和短横线；创建后尽量不要修改。</small>
+        </div>
+
+        <div class="field">
+          <label for="name">商品名称 *</label>
+          <input id="name" type="text" placeholder="例如 三元牛奶 1.5L" maxlength="100" required />
+        </div>
+
+        <div class="field">
+          <label for="category">品类</label>
+          <input id="category" type="text" placeholder="例如 乳制品" maxlength="50" />
+        </div>
+
+        <div class="field">
+          <label for="brand">品牌</label>
+          <input id="brand" type="text" placeholder="例如 三元" maxlength="50" />
+        </div>
+
+        <div class="field">
+          <label for="specification">规格</label>
+          <input id="specification" type="text" placeholder="例如 1.5L/瓶" maxlength="100" />
+        </div>
+
+        <div class="field">
+          <label for="unitName">计量单位 *</label>
+          <input id="unitName" type="text" value="瓶" placeholder="瓶 / 盒 / 袋" maxlength="20" required />
+        </div>
+
+        <div class="field">
+          <label for="shelfLifeDays">未开封保质期（天）</label>
+          <input id="shelfLifeDays" type="number" min="0" step="1" placeholder="按包装实际填写" />
+        </div>
+
+        <div class="field">
+          <label for="openedLifeHours">开封后可用时长（小时）</label>
+          <input id="openedLifeHours" type="number" min="0" step="1" placeholder="例如 48" />
+        </div>
+
+        <div class="field">
+          <label for="minStock">最低库存预警</label>
+          <input id="minStock" type="number" min="0" step="1" value="0" />
+        </div>
+
+        <div class="field field-action">
+          <button id="saveBtn" class="primary-button" type="submit">保存商品档案</button>
+        </div>
+      </form>
+
+      <p id="formMessage" class="form-message" role="alert" aria-live="polite"></p>
+    </section>
+
+    <section class="content-card">
+      <div class="section-title-row">
+        <div>
+          <p class="eyebrow">PRODUCT LIST</p>
+          <h2>已有商品</h2>
+        </div>
+        <button id="refreshBtn" class="secondary-button" type="button">刷新</button>
+      </div>
+
+      <div id="productList" class="product-list">
+        <div class="empty-state">正在加载商品档案…</div>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
+  <script src="products.js"></script>
+</body>
+</html>

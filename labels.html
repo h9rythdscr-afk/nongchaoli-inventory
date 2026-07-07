@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f3f1e9" />
+  <title>弄潮里库存系统｜二维码标签</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="app-page labels-page">
+  <header class="app-header compact-header no-print">
+    <div>
+      <p class="eyebrow">QR LABELS</p>
+      <h1>二维码标签</h1>
+      <p id="sessionText" class="muted">正在验证登录状态…</p>
+    </div>
+    <div class="header-actions">
+      <a class="secondary-button button-link" href="dashboard.html">返回总览</a>
+      <button id="printBtn" class="primary-button header-primary" type="button">打印当前标签</button>
+    </div>
+  </header>
+
+  <main class="dashboard-shell labels-shell">
+    <section class="content-card no-print">
+      <div class="label-controls">
+        <div>
+          <label for="batchSelect">选择进货批次</label>
+          <select id="batchSelect"></select>
+        </div>
+        <p id="labelSummary" class="muted">正在加载标签…</p>
+      </div>
+      <p class="label-tip">建议先用普通A4纸测试打印比例，再根据实际标签纸调整打印缩放。</p>
+    </section>
+
+    <section id="labelGrid" class="label-grid">
+      <div class="empty-state">正在生成二维码标签…</div>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="config.js"></script>
+  <script src="labels.js"></script>
+</body>
+</html>

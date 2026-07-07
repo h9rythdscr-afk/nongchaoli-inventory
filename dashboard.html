@@ -14,7 +14,10 @@
       <h1>库存总览</h1>
       <p id="welcomeText" class="muted">正在验证登录状态…</p>
     </div>
-    <button id="logoutBtn" class="secondary-button" type="button">退出登录</button>
+    <div class="header-actions">
+      <a class="secondary-button button-link" href="labels.html">打印二维码标签</a>
+      <button id="logoutBtn" class="secondary-button" type="button">退出登录</button>
+    </div>
   </header>
 
   <main class="dashboard-shell">
@@ -44,6 +47,19 @@
     <section class="content-card">
       <div class="section-title-row">
         <div>
+          <p class="eyebrow">QUICK ACCESS</p>
+          <h2>输入单件编码</h2>
+        </div>
+      </div>
+      <form id="codeForm" class="quick-code-form">
+        <input id="codeInput" type="text" placeholder="例如 SY15L-20260707-001" autocomplete="off" required />
+        <button class="primary-button compact-button" type="submit">打开单件</button>
+      </form>
+    </section>
+
+    <section class="content-card">
+      <div class="section-title-row">
+        <div>
           <p class="eyebrow">RECENT UNITS</p>
           <h2>最近单件库存</h2>
         </div>
@@ -56,10 +72,10 @@
     </section>
 
     <section class="content-card next-step-card">
-      <p class="eyebrow">NEXT STEP</p>
-      <h2>框架已连接成功</h2>
+      <p class="eyebrow">SCAN WORKFLOW</p>
+      <h2>扫码后直接操作单件</h2>
       <p>
-        当前页面用于验证员工登录、RLS 权限和库存数据读取。下一步将增加商品档案、进货登记、批量生成二维码及扫码操作页面。
+        点击任意单件，或扫描打印出的二维码，即可进入该瓶/盒/袋的独立页面，执行开封、用完、报废等操作，并自动写入操作流水。
       </p>
     </section>
   </main>

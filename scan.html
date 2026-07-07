@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f3f1e9" />
+  <title>弄潮里库存系统｜单件操作</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="app-page scan-page">
+  <header class="app-header compact-header">
+    <div>
+      <p class="eyebrow">UNIT TRACEABILITY</p>
+      <h1>单件操作</h1>
+      <p id="sessionText" class="muted">正在验证登录状态…</p>
+    </div>
+    <div class="header-actions">
+      <a class="secondary-button button-link" href="dashboard.html">返回总览</a>
+      <button id="logoutBtn" class="secondary-button" type="button">退出登录</button>
+    </div>
+  </header>
+
+  <main class="dashboard-shell scan-shell">
+    <section id="unitCard" class="content-card unit-detail-card">
+      <div class="empty-state">正在读取单件信息…</div>
+    </section>
+
+    <section id="actionCard" class="content-card hidden-card">
+      <div class="section-title-row">
+        <div>
+          <p class="eyebrow">ACTIONS</p>
+          <h2>本次操作</h2>
+        </div>
+      </div>
+
+      <label for="operationNote">操作备注（选填）</label>
+      <textarea id="operationNote" class="operation-note" placeholder="例如：用于拿铁出品、包装破损、临期处理"></textarea>
+      <p id="actionMessage" class="form-message" role="alert" aria-live="polite"></p>
+      <div id="actionButtons" class="action-grid"></div>
+    </section>
+
+    <section class="content-card">
+      <div class="section-title-row">
+        <div>
+          <p class="eyebrow">HISTORY</p>
+          <h2>操作流水</h2>
+        </div>
+        <button id="refreshBtn" class="secondary-button" type="button">刷新</button>
+      </div>
+      <div id="eventList" class="event-list">
+        <div class="empty-state">正在加载操作流水…</div>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
+  <script src="scan.js"></script>
+</body>
+</html>

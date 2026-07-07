@@ -34,6 +34,21 @@ const db = configurationIsValid()
   ? supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY)
   : null;
 
+function getSafeRedirectTarget() {
+  const target = sessionStorage.getItem("inventory_redirect_after_login");
+  if (!target) return "dashboard.html";
+
+  try {
+    const url = new URL(target, window.location.href);
+    if (url.origin !== window.location.origin) return "dashboard.html";
+    sessionStorage.removeItem("inventory_redirect_after_login");
+    return url.href;
+  } catch {
+    sessionStorage.removeItem("inventory_redirect_after_login");
+    return "dashboard.html";
+  }
+}
+
 async function redirectExistingSession() {
   if (!db) return;
 
@@ -42,7 +57,7 @@ async function redirectExistingSession() {
   } = await db.auth.getSession();
 
   if (session) {
-    window.location.replace("dashboard.html");
+    window.location.replace(getSafeRedirectTarget());
   }
 }
 
@@ -93,7 +108,7 @@ loginForm.addEventListener("submit", async (event) => {
 
     showMessage(`欢迎回来，${profile.display_name || "员工"}。`, "success");
     window.setTimeout(() => {
-      window.location.replace("dashboard.html");
+      window.location.replace(getSafeRedirectTarget());
     }, 350);
   } catch (error) {
     console.error(error);

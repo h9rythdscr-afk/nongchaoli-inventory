@@ -11,6 +11,8 @@ const wasteCount = document.getElementById("wasteCount");
 const unitList = document.getElementById("unitList");
 const logoutBtn = document.getElementById("logoutBtn");
 const refreshBtn = document.getElementById("refreshBtn");
+const codeForm = document.getElementById("codeForm");
+const codeInput = document.getElementById("codeInput");
 
 const STATUS_LABELS = {
   label_generated: "待入库",
@@ -107,7 +109,7 @@ async function loadDashboard() {
     ["discarded", "expired"].includes(item.status)
   ).length;
 
-  const recentRows = rows.slice(0, 12);
+  const recentRows = rows.slice(0, 30);
 
   if (!recentRows.length) {
     unitList.innerHTML = `<div class="empty-state">暂无单件库存数据。</div>`;
@@ -119,7 +121,7 @@ async function loadDashboard() {
       const product = item.products || {};
       const batch = item.purchase_batches || {};
       return `
-        <article class="unit-row">
+        <a class="unit-row unit-link" href="scan.html?code=${encodeURIComponent(item.unit_code)}">
           <div class="unit-main">
             <strong>${escapeHtml(product.name || "未命名商品")}</strong>
             <span>${escapeHtml(product.specification || "")}</span>
@@ -133,11 +135,18 @@ async function loadDashboard() {
             <small>位置：${escapeHtml(item.storage_location || "—")}</small>
             <small>入库：${formatDate(item.inbound_at)}</small>
           </div>
-        </article>
+        </a>
       `;
     })
     .join("");
 }
+
+codeForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const code = codeInput.value.trim().toUpperCase();
+  if (!code) return;
+  window.location.href = `scan.html?code=${encodeURIComponent(code)}`;
+});
 
 logoutBtn.addEventListener("click", async () => {
   logoutBtn.disabled = true;

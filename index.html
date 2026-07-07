@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f3f1e9" />
+  <title>弄潮里库存系统｜员工登录</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="login-page">
+  <main class="login-shell">
+    <section class="brand-panel">
+      <div class="brand-mark">弄潮里</div>
+      <p class="eyebrow">NONGCHAOLI INVENTORY</p>
+      <h1>单件库存<br />追溯系统</h1>
+      <p class="brand-copy">
+        每一瓶、每一盒、每一袋都有独立编码，完整记录入库、开封、用完与报废。
+      </p>
+      <div class="feature-row">
+        <span>单件追溯</span>
+        <span>扫码操作</span>
+        <span>临期预警</span>
+      </div>
+    </section>
+
+    <section class="login-card">
+      <div class="login-heading">
+        <span class="status-dot"></span>
+        <span>员工入口</span>
+      </div>
+
+      <h2>登录库存系统</h2>
+      <p class="muted">请使用已由管理员创建的员工账号登录。</p>
+
+      <form id="loginForm" novalidate>
+        <label for="email">登录邮箱</label>
+        <input
+          id="email"
+          name="email"
+          type="email"
+          autocomplete="username"
+          placeholder="请输入邮箱"
+          required
+        />
+
+        <label for="password">登录密码</label>
+        <div class="password-wrap">
+          <input
+            id="password"
+            name="password"
+            type="password"
+            autocomplete="current-password"
+            placeholder="请输入密码"
+            minlength="6"
+            required
+          />
+          <button id="togglePassword" class="text-button" type="button">显示</button>
+        </div>
+
+        <p id="message" class="form-message" role="alert" aria-live="polite"></p>
+
+        <button id="loginBtn" class="primary-button" type="submit">
+          登录
+        </button>
+      </form>
+
+      <p class="login-note">账号停用或密码遗忘时，请联系店长处理。</p>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
+  <script src="login.js"></script>
+</body>
+</html>

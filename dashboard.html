@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f3f1e9" />
+  <title>弄潮里库存系统｜库存总览</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="app-page">
+  <header class="app-header">
+    <div>
+      <p class="eyebrow">NONGCHAOLI INVENTORY</p>
+      <h1>库存总览</h1>
+      <p id="welcomeText" class="muted">正在验证登录状态…</p>
+    </div>
+    <button id="logoutBtn" class="secondary-button" type="button">退出登录</button>
+  </header>
+
+  <main class="dashboard-shell">
+    <section class="metric-grid">
+      <article class="metric-card">
+        <span>在库未开封</span>
+        <strong id="stockCount">—</strong>
+        <small>瓶 / 盒 / 袋</small>
+      </article>
+      <article class="metric-card">
+        <span>已开封使用中</span>
+        <strong id="openedCount">—</strong>
+        <small>需要关注开封期限</small>
+      </article>
+      <article class="metric-card">
+        <span>已用完</span>
+        <strong id="usedCount">—</strong>
+        <small>历史累计</small>
+      </article>
+      <article class="metric-card alert-card">
+        <span>已报废 / 过期</span>
+        <strong id="wasteCount">—</strong>
+        <small>用于损耗统计</small>
+      </article>
+    </section>
+
+    <section class="content-card">
+      <div class="section-title-row">
+        <div>
+          <p class="eyebrow">RECENT UNITS</p>
+          <h2>最近单件库存</h2>
+        </div>
+        <button id="refreshBtn" class="secondary-button" type="button">刷新</button>
+      </div>
+
+      <div id="unitList" class="unit-list">
+        <div class="empty-state">正在加载库存数据…</div>
+      </div>
+    </section>
+
+    <section class="content-card next-step-card">
+      <p class="eyebrow">NEXT STEP</p>
+      <h2>框架已连接成功</h2>
+      <p>
+        当前页面用于验证员工登录、RLS 权限和库存数据读取。下一步将增加商品档案、进货登记、批量生成二维码及扫码操作页面。
+      </p>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
+  <script src="dashboard.js"></script>
+</body>
+</html>

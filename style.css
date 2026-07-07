@@ -923,3 +923,26 @@ input:focus {
 .secondary-btn:hover {
   background: #ffffff;
 }
+.password-link-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 22px;
+  border: 1px solid rgba(38, 80, 55, 0.12);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.72);
+  color: #304e3d;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.password-link-btn:hover {
+  background: #ffffff;
+  transform: translateY(-1px);
+}
